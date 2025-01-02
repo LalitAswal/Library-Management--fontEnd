@@ -1,16 +1,16 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Login from "./pages/Login.jsx";
-import store from "./store/store.jsx";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LoginPage from './pages/LoginPage.jsx';
+import { RegistrationPage } from './pages/RegistrationPage.jsx';
 
 function App() {
   return (
-    <Provider store={store}>
-      <Router>
-          <Route path="/" exact component={Login} />
-      </Router>
-    </Provider>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/register" element={<RegistrationPage />} />
+      </Routes>
+    </Router>
   );
 }
 

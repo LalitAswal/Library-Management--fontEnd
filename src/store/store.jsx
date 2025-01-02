@@ -1,14 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit';
-import thunk from "redux-thunk";
-import authReducer from "../features/auth/authSlice.js";
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { loginReducer } from '../features/slice/authSlice.js';
+import { thunk } from 'redux-thunk';
+
 
 const store = configureStore({
-    reducer: {
-        auth: authReducer
-    },
-    middleware: [thunk],
-
+  reducer: {
+    login: loginReducer,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
 });
-
 
 export default store;

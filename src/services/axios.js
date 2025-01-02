@@ -1,7 +1,8 @@
 import axios from "axios";
+import { BASE_URL } from "../constant/environment.js";
 
 const axiosClient = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: BASE_URL,
   timeout: 2000,
   headers: {
     "Content-Type": "application/json",
