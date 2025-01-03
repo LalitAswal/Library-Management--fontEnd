@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userLoginAction } from "../features/action/authAction";
+import { userLoginAction } from "../Redux/features/action/authAction.js";
+
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+
 
 const LoginPage = () => {
   console.log("checking login page");
@@ -12,6 +16,7 @@ const LoginPage = () => {
   });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate(); 
   console.log("checking dispatch ", dispatch);
 
   // Using the correct selector to access login state
@@ -22,8 +27,13 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const result = await dispatch(userLoginAction(loginForm));
+      const token = result?.payload["data"].token;
+      const decodedToken =await jwtDecode(token);
+      sessionStorage.setItem("id", decodedToken.id);
+      sessionStorage.setItem("role", decodedToken.role);
+      navigate("/BooksList")
 
-      console.log("checking login result", result);
+
     } catch (error) {
       console.log("error", error);
     }

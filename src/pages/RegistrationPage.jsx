@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { userRegisterAction } from '../Redux/features/action/authAction.js';
 
 export const RegistrationPage = () => {
 
@@ -11,10 +12,13 @@ export const RegistrationPage = () => {
         password:"",
     })
 
+    const { loading, message, status } = useSelector((state) => state.register);
+
+
     const handleRegistration = async(e)=>{
         e.preventDefault();
         try {
-          // const result = await dispatch(registerUser(registrationForm))
+          const result = await dispatch(userRegisterAction(registrationForm))
 
         } catch (error) {
           console.log(error)
@@ -31,24 +35,31 @@ export const RegistrationPage = () => {
 
   return (
     <>
-    <form action="" method="post">
-    <label htmlFor="">
+    <form  onSubmit={handleRegistration}>
+    <label >
       username:
-      <input type="text"
-      name="username"
-      value={registrationForm?.userName} />
+      <input 
+      type="text"
+      id="userName"
+      name="userName"
+      value={registrationForm?.userName}
       onChange={handleChange}
-      required
+       />
+      
     </label>
     password:
-    <label htmlFor="">
-      <input type="text"
+    <label >
+      <input type="password"
       name="password"
-      value={registrationForm?.password} />
+      
+      id="password"
+      value={registrationForm?.password}
       onChange={handleChange}
-      required
+       />
     </label>
+    <button type='submit'>Submit</button>
     </form>
+    {message && <p>{message}</p>}
     </>
   )
 }

@@ -1,6 +1,7 @@
 const API_ROUTES = {
     LOGIN:"/user/login",
-    REGISTRATION:"/user/register",
+    REGISTER:"/user/register",
+    ALL_BOOKS:"/book/",
 
 }
 

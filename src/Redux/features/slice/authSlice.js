@@ -27,7 +27,6 @@ const userLoginSlice = createSlice({
       });
   },
 });
-
 // User Registration Slice
 const userRegistrationSlice = createSlice({
   name: NAME_CONSTANT.REGISTER,
