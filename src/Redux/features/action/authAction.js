@@ -18,6 +18,7 @@ export const userLoginAction = createAsyncThunk(NAME_CONSTANT.LOGIN, async(userD
 export const userRegisterAction = createAsyncThunk(NAME_CONSTANT.REGISTER, async(userData, {rejectWithValue}) =>{
     try{
         const response = await axiosClient.post(API_ROUTES.REGISTER, {...userData});
+        console.log("response register", response);
         return response;
     }catch(error){
         rejectWithValue(error);

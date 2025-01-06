@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 
 const LoginPage = () => {
-  console.log("checking login page");
 
   // State to manage form inputs
   const [loginForm, setLoginForm] = useState({
@@ -17,7 +16,6 @@ const LoginPage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate(); 
-  console.log("checking dispatch ", dispatch);
 
   // Using the correct selector to access login state
   const { loading, message, status } = useSelector((state) => state.login);
@@ -31,6 +29,7 @@ const LoginPage = () => {
       const decodedToken =await jwtDecode(token);
       sessionStorage.setItem("id", decodedToken.id);
       sessionStorage.setItem("role", decodedToken.role);
+      sessionStorage.setItem("token", token);
       navigate("/BooksList")
 
 

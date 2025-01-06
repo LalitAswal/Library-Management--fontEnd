@@ -1,14 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { allBooksAction } from '../../../Redux/features/action/booksAction.js';
 
 export const BooksList = () => {
   const dispatch = useDispatch();
+  const [searchValue, setValue] = useState('');
 
   // Access state from Redux
-  const { books, loading, message, status } = useSelector((state) => {
-    console.log('checkingsstate', state)
-    state.allBooks});
+  const { data:books, loading, message, status } = useSelector((state) => state.allBooks);
+
+  const handleSearchChange =(e)=>{
+    setValue(e.target.value);
+  }
+
+  const handleBorrow=(id)=>{
+    
+  }
 
   // Fetch all books on component mount
   useEffect(() => {
@@ -18,14 +25,42 @@ export const BooksList = () => {
   return (
     <div>
       <h1>Books List</h1>
+      <h3>
+        <label htmlFor="">
+          Search:
+          <input type="text"
+           name="userName"
+           value={searchValue}
+           onChange={handleSearchChange} 
+           />
+        </label>
+      </h3>
       {loading && <p>Loading...</p>}
       {status === 'error' && <p style={{ color: 'red' }}>{message}</p>}
       {status === 'success' && books.length === 0 && <p>No books found.</p>}
-      <ul>
-        {books.map((book) => (
-          <li key={book.id}>{book.title}</li>
-        ))}
-      </ul>
+      <table border="1" cellPadding="15" cellSpacing="0">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {books.map((book) => (
+              <tr key={book.id}>
+                <td>{book.title}</td>
+                <td>{book.author}</td>
+                <button
+                style={{ backgroundColor: book.status === 'AVAILABLE' ? 'green' : 'red' }}
+                onClick={()=>handleBorrow(book.id)}>
+                  
+                  <td> {book.status === 'AVAILABLE' ? 'Borrow' : 'Unavailable'}</td>
+                  </button>
+              </tr>
+            ))}
+          </tbody>
+        </table>
     </div>
   );
 };

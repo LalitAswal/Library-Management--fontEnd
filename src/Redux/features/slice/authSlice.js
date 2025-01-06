@@ -19,6 +19,7 @@ const userLoginSlice = createSlice({
         state.data = action?.payload?.data;
         state.message = action?.payload?.message;
         state.status = action?.payload?.status;
+        console.log('state.data',state.data)
       })
       .addCase(userLoginAction.rejected, (state, action) => {
         state.loading = false;
