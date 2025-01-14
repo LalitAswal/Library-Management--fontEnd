@@ -1,7 +1,7 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { loginReducer, registrationReducer } from '../features/slice/authSlice.js';
 import { thunk } from 'redux-thunk';
-import { allBooksReducer } from '../features/slice/bookSlice.js';
+import { allBooksReducer, borrowBookReducer, returnBookReducer } from '../features/slice/bookSlice.js';
 
 
 const store = configureStore({
@@ -9,6 +9,10 @@ const store = configureStore({
     login: loginReducer,
     register:registrationReducer,
     allBooks: allBooksReducer,
+    borrowBook:borrowBookReducer,
+    returnBook:returnBookReducer,
+    
+    
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
 });

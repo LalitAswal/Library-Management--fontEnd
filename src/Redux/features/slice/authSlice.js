@@ -4,53 +4,46 @@ import { userLoginAction, userRegisterAction } from "../action/authAction.js";
 
 const initialState = { message: "", data: [], status: null, loading: false };
 
-// User Login Slice
-const userLoginSlice = createSlice({
-  name: NAME_CONSTANT.LOGIN,
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(userLoginAction.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(userLoginAction.fulfilled, (state, action) => {
-        state.loading = false;
-        state.data = action?.payload?.data;
-        state.message = action?.payload?.message;
-        state.status = action?.payload?.status;
-        console.log('state.data',state.data)
-      })
-      .addCase(userLoginAction.rejected, (state, action) => {
-        state.loading = false;
-        state.message = action?.payload?.message;
-        state.status = action?.payload?.status;
-      });
-  },
-});
-// User Registration Slice
-const userRegistrationSlice = createSlice({
-  name: NAME_CONSTANT.REGISTER,
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(userRegisterAction.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(userRegisterAction.fulfilled, (state, action) => {
-        state.loading = false;
-        state.data = action?.payload?.data;
-        state.message = action?.payload?.message;
-        state.status = action?.payload?.status;
-      })
-      .addCase(userRegisterAction.rejected, (state, action) => {
-        state.loading = false;
-        state.message = action?.payload?.message;
-        state.status = action?.payload?.status;
-      });
-  },
-});
+const handlePending = (state) =>{
+  state.loading = true
+}
 
+const handleFulfilled = (state, action) =>{
+  state.loading = false;
+  state.data = action?.payload?.data;
+  state.message = action?.payload?.message;
+  state.status = action?.payload?.status;
+  console.log('state.data',state.data)
+}
+
+const handleRejected = (state, action) =>{
+  state.loading = false;
+  state.message = action?.payload?.message;
+  state.status = action?.payload?.status;
+}
+
+const createGenericSlice = (name, action) =>{
+  createSlice({
+    name,
+    initialState,
+    extraReducers: (builder)=>{
+        builder
+        .addCase(action.pending, handlePending)
+        .addCase(action.fulfilled, handleFulfilled)
+        .addCase(action.rejected, handleRejected);
+    },
+  })
+}
+
+
+const userLoginSlice = createGenericSlice(
+  NAME_CONSTANT.LOGIN,
+  userLoginAction
+);
+
+const userRegistrationSlice = createGenericSlice(
+  NAME_CONSTANT.REGISTER,
+  userRegisterAction
+)
 export const loginReducer = userLoginSlice.reducer;
 export const registrationReducer = userRegistrationSlice.reducer;

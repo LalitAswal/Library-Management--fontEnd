@@ -4,58 +4,49 @@ import { allBooksAction, borrowBookAction } from "../action/booksAction.js";
 
 const initialState = { message: "", data: [], status: null, loading: false };
 
+const handlePending = (state) => {
+  state.loading = true;
+};
 
-const allBooksSlice = createSlice({
-    name: NAME_CONSTANT.ALL_BOOKS,
+const handleFulfilled = (state, action) => {
+  state.loading = false;
+  state.data = action?.payload?.data.response;
+  state.message = action?.payload?.data.message;
+  state.status = action?.payload?.status;
+  console.log("state.data", action?.payload?.data.response);
+};
+
+const handleRejected = (state, action) => {
+  state.loading = false;
+  state.message = action?.payload?.message;
+  state.status = action?.payload?.status;
+};
+
+const createGenericSlice = (name, action) =>
+  createSlice({
+    name,
     initialState,
-    reducers: {},
     extraReducers: (builder) => {
-        builder
-        .addCase(allBooksAction.pending, (state) => {
-            state.loading = true;
-        });
-
-        builder.addCase(allBooksAction.fulfilled, (state, action) => {      
-            state.loading = false;
-            state.data = action?.payload?.data.response;
-            state.message = action?.payload?.data.message;
-            state.status = action?.payload?.status;
-            console.log('state.data',action?.payload?.data.response)
-        }   
-        );  
-        builder.addCase(allBooksAction.rejected, (state, action) => {
-            state.loading = false;
-            state.message = action?.payload?.message;
-            state.status = action?.payload?.status;
-        });
+      builder
+        .addCase(action.pending, handlePending)
+        .addCase(action.fulfilled, handleFulfilled)
+        .addCase(action.rejected, handleRejected);
     },
-    });
+  });
 
-const BorrowBookSlice = createSlice({
-    name: NAME_CONSTANT.BORROW_BOOK,
-    initialState,
-    reducers: {},
-    extraReducers:(builder)=>{
-        builder
-        .addCase(borrowBookAction.pending, (state) => {
-            state.loading = true;
-        });
-        builder.addCase(borrowBookAction.fulfilled, (state, action) => {      
-            state.loading = false;
-            state.data = action?.payload?.data.response;
-            state.message = action?.payload?.data.message;
-            state.status = action?.payload?.status;
-            console.log('state.data',action?.payload?.data.response)
-        }   
-        );
-        builder.addCase(borrowBookAction.rejected, (state, action) => {
-            state.loading = false;
-            state.message = action?.payload?.message;
-            state.status = action?.payload?.status;
-        });
-}
-});
-
-export const borrowBookReducer = BorrowBookSlice.reducer;
+const allBooksSlice = createGenericSlice(
+  NAME_CONSTANT.ALL_BOOKS,
+  allBooksAction
+);
+const borrowBookSlice = createGenericSlice(
+  NAME_CONSTANT.BORROW_BOOK,
+  borrowBookAction
+);
+const returnBookSlice = createGenericSlice(
+  NAME_CONSTANT.RETURN_BOOK,
+  borrowBookAction
+);
 
 export const allBooksReducer = allBooksSlice.reducer;
+export const borrowBookReducer = borrowBookSlice.reducer;
+export const returnBookReducer = returnBookSlice.reducer;
