@@ -1,4 +1,4 @@
-const API_ROUTES = {
+const ADMIN_API_ROUTES = {
     ALL_USER_LIST:"/user/",
     BULK_ADD_USER:"/user/bulkAddUser",
     DELETE_USER:"/user/",
@@ -8,4 +8,4 @@ const API_ROUTES = {
 
 }
 
-export default API_ROUTES;
+export default ADMIN_API_ROUTES;

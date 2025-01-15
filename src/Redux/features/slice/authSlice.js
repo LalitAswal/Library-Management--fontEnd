@@ -16,6 +16,7 @@ const handleFulfilled = (state, action) =>{
   console.log('state.data',state.data)
 }
 
+
 const handleRejected = (state, action) =>{
   state.loading = false;
   state.message = action?.payload?.message;
