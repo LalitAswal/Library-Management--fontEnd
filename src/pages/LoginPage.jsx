@@ -8,25 +8,24 @@ import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
 
-  // State to manage form inputs
   const [loginForm, setLoginForm] = useState({
     userName: "",
     password: "",
   });
-
   const dispatch = useDispatch();
   const navigate = useNavigate(); 
 
-  // Using the correct selector to access login state
   const { loading, message, status } = useSelector((state) => state.login);
 
-  // Handle form submit
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const result = await dispatch(userLoginAction(loginForm));
-      const token = result?.payload["data"].token;
+      console.log("result", result);
+
+      const token = result?.payload.token;
       const decodedToken =await jwtDecode(token);
+      console.log("decodedToken", decodedToken);
       sessionStorage.setItem("id", decodedToken.id);
       sessionStorage.setItem("role", decodedToken.role);
       sessionStorage.setItem("token", token);

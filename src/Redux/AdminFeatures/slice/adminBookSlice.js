@@ -22,7 +22,7 @@ const handleRejected = (state, rejected) =>{
 }
 
 const createGenericSlice = (name, action) =>{
-    createSlice({
+    return  createSlice({
         name,
         initialState,
         extraReducers: (builder) =>{

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import NAME_CONSTANT from "../nameConstant/nameConstant.js";
-import { allBooksAction, borrowBookAction } from "../action/booksAction.js";
+import { allBooksAction, borrowBookAction, bookDetailsAction, searchBookAction } from "../action/booksAction.js";
 
 const initialState = { message: "", data: [], status: null, loading: false };
 
@@ -13,7 +13,6 @@ const handleFulfilled = (state, action) => {
   state.data = action?.payload?.data.response;
   state.message = action?.payload?.data.message;
   state.status = action?.payload?.status;
-  console.log("state.data", action?.payload?.data.response);
 };
 
 const handleRejected = (state, action) => {
@@ -23,7 +22,8 @@ const handleRejected = (state, action) => {
 };
 
 const createGenericSlice = (name, action) =>
-  createSlice({
+{
+  return createSlice({
     name,
     initialState,
     extraReducers: (builder) => {
@@ -33,6 +33,8 @@ const createGenericSlice = (name, action) =>
         .addCase(action.rejected, handleRejected);
     },
   });
+}
+
 
 const allBooksSlice = createGenericSlice(
   NAME_CONSTANT.ALL_BOOKS,
@@ -47,6 +49,17 @@ const returnBookSlice = createGenericSlice(
   borrowBookAction
 );
 
+const bookDetailsSlice  = createGenericSlice(
+  NAME_CONSTANT.BOOK_DETAILS,
+  bookDetailsAction
+)
+const searchBookSlice  = createGenericSlice(
+  NAME_CONSTANT.SEARCH_BOOK,
+  searchBookAction
+)
+
 export const allBooksReducer = allBooksSlice.reducer;
+export const searchBookReducer = searchBookSlice.reducer;
 export const borrowBookReducer = borrowBookSlice.reducer;
 export const returnBookReducer = returnBookSlice.reducer;
+export const bookDetailsReducer = bookDetailsSlice.reducer;

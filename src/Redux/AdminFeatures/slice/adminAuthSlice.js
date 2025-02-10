@@ -1,39 +1,39 @@
 import { createSlice } from "@reduxjs/toolkit";
 import ADMIN_NAME_CONSTANT from "../nameConstant/adminNameConstant.js";
-import {  listAllUserAction, addUserInBulk, deleteUser } from "../action/adminAuthAction.js";
-import { addBook, updateBook, bulkAddBook } from "../action/adminBookAction.js";
-//
-const initialState = {message: "", data:[], status: null, loading: false};
+import { listAllUserAction, addUserInBulk, deleteUser } from "../action/adminAuthAction.js";
 
-const handlePending = (state) =>{   
+const initialState = { message: "", data: [], status: null, loading: false };
+
+const handlePending = (state) => {
     state.loading = true;
-}
+};
 
-const handleFulfilled = (state, pending) =>{
+const handleFulfilled = (state, action) => {
+    console.log('action?.payload?.data',action?.payload?.data)
     state.loading = false;
-    state.data = pending?.payload?.data;
-    state.message = pending?.payload?.message;
-    state.status = pending?.payload?.status;
-}
+    state.data = action?.payload?.data;
+    state.message = action?.payload?.message;
+    state.status = action?.payload?.status;
+};
 
-const handleRejected = (state, rejected) =>{
+const handleRejected = (state, action) => {
     state.loading = false;
-    state.message = rejected?.payload?.message;
-    state.status = rejected?.payload?.status;
-}
+    state.message = action?.payload?.message;
+    state.status = action?.payload?.status;
+};
 
-const createGenericSlice = (name, action) =>{
-    createSlice({
+const createGenericSlice = (name, action) => {
+    return createSlice({
         name,
         initialState,
-        extraReducers: (builder) =>{
+        extraReducers: (builder) => {
             builder
-            .addCase(action.pending, handlePending)
-            .addCase(action.fulfilled, handleFulfilled)
-            .addCase(action.rejected, handleRejected);
+                .addCase(action.pending, handlePending)
+                .addCase(action.fulfilled, handleFulfilled)
+                .addCase(action.rejected, handleRejected);
         },
     });
-}
+};
 
 const allUserSlice = createGenericSlice(
     ADMIN_NAME_CONSTANT.ALL_USER_LIST,
@@ -43,15 +43,13 @@ const allUserSlice = createGenericSlice(
 const addBulkUserSlice = createGenericSlice(
     ADMIN_NAME_CONSTANT.BULK_ADD_USER,
     addUserInBulk
-)
+);
 
 const deleteUserSlice = createGenericSlice(
     ADMIN_NAME_CONSTANT.DELETE_USER,
     deleteUser
-)
+);
 
 export const allUserReducer = allUserSlice.reducer;
 export const addBulkUserReducer = addBulkUserSlice.reducer;
 export const deleteUserReducer = deleteUserSlice.reducer;
-
-
