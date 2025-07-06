@@ -1,0 +1,76 @@
+/* AuthForm.css */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+.auth-form {
+  max-width: 400px;
+  margin: 80px auto;
+  background-color: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-label {
+  display: block;
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: 500;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 15px;
+  margin-top: 5px;
+  transition: border 0.2s ease;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: #4b7bec;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4b7bec;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+  background-color: #3867d6;
+}
+
+.auth-link {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  color: #4b7bec;
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+.auth-message {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}

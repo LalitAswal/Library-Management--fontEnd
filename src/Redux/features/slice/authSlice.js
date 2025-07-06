@@ -13,7 +13,6 @@ const handleFulfilled = (state, action) => {
   state.data = action.payload?.data || action.payload;
   state.message = action.payload?.message || "Success";
   state.status = action.payload?.status || 200;
-  console.log("state.data", state.data);
 };
 
 const handleRejected = (state, action) => {
@@ -35,11 +34,6 @@ const createGenericSlice = (name, action) => {
   });
 };
 
-console.log("NAME_CONSTANT.LOGIN:", NAME_CONSTANT.LOGIN);
-console.log("NAME_CONSTANT.REGISTER:", NAME_CONSTANT.REGISTER);
-
-console.log("userLoginAction:", userLoginAction);
-console.log("userRegisterAction:", userRegisterAction);
 
 const userLoginSlice = createGenericSlice(NAME_CONSTANT.LOGIN, userLoginAction);
 const userRegistrationSlice = createGenericSlice(

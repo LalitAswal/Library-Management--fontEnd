@@ -9,9 +9,10 @@ export const userLoginAction = createAsyncThunk(
     try {
       const response = await axiosClient.post(API_ROUTES.LOGIN, { ...userData });
       console.log("response login", response.data);
-      return response.data; // ✅ Return `response.data` instead of full response
+      console.log("API_ROUTES.LOGIN", API_ROUTES.LOGIN);
+      return response.data; 
     } catch (error) {
-      return rejectWithValue(error.response?.data || "An error occurred"); // ✅ Properly returning the error
+      return rejectWithValue(error.response?.data || "An error occurred"); 
     }
   }
 );
@@ -22,6 +23,7 @@ export const userRegisterAction = createAsyncThunk(
     try {
       const response = await axiosClient.post(API_ROUTES.REGISTER, { ...userData });
       console.log("response register", response.data);
+      console.log("API_ROUTES.REGISTER", API_ROUTES.REGISTER);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || "An error occurred");
