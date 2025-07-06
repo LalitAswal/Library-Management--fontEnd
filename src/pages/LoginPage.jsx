@@ -4,16 +4,15 @@ import { userLoginAction } from "../Redux/features/action/authAction.js";
 
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-
+import "./LoginPage.css";
 
 const LoginPage = () => {
-
   const [loginForm, setLoginForm] = useState({
     userName: "",
     password: "",
   });
   const dispatch = useDispatch();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const { loading, message, status } = useSelector((state) => state.login);
 
@@ -24,14 +23,11 @@ const LoginPage = () => {
       console.log("result", result);
 
       const token = result?.payload.token;
-      const decodedToken =await jwtDecode(token);
-      console.log("decodedToken", decodedToken);
+      const decodedToken = await jwtDecode(token);
       sessionStorage.setItem("id", decodedToken.id);
       sessionStorage.setItem("role", decodedToken.role);
       sessionStorage.setItem("token", token);
-      navigate("/BooksList")
-
-
+      navigate("/BooksList");
     } catch (error) {
       console.log("error", error);
     }
@@ -48,10 +44,11 @@ const LoginPage = () => {
 
   return (
     <>
-      <form onSubmit={handleLogin}>
-        <label htmlFor="userName">
+      <form className="auth-form" onSubmit={handleLogin}>
+        <label htmlFor="userName" className="auth-label">
           User Name:
           <input
+            className="auth-input"
             type="text"
             id="userName"
             name="userName"
@@ -60,10 +57,12 @@ const LoginPage = () => {
             required
           />
         </label>
-        <br />
-        <label htmlFor="password">
+        {message && <span className="auth-message">{message}</span>}
+
+        <label htmlFor="password" className="auth-label">
           Password:
           <input
+            className="auth-input"
             type="password"
             id="password"
             name="password"
@@ -72,15 +71,15 @@ const LoginPage = () => {
             required
           />
         </label>
-        <br />
-        <button type="submit" disabled={loading}>
+
+        <button className="auth-button" type="submit" disabled={loading}>
           {loading ? "Logging in..." : "Submit"}
         </button>
-        <br />
-        <a href="/register">Registration</a>
-      </form>
 
-      {message && <p>{message}</p>}
+        <a className="auth-link" href="/register">
+          Registration
+        </a>
+      </form>
     </>
   );
 };

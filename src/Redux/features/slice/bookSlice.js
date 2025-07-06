@@ -10,9 +10,10 @@ const handlePending = (state) => {
 
 const handleFulfilled = (state, action) => {
   state.loading = false;
-  state.data = action?.payload?.data.response;
+  state.data = action?.payload?.data ;
   state.message = action?.payload?.data.message;
   state.status = action?.payload?.status;
+  console.log('action?.payload?.data.response',action)
 };
 
 const handleRejected = (state, action) => {
@@ -27,6 +28,8 @@ const createGenericSlice = (name, action) =>
     name,
     initialState,
     extraReducers: (builder) => {
+
+       console.log('action?.payload?.data.response',action.handleFulfilled)
       builder
         .addCase(action.pending, handlePending)
         .addCase(action.fulfilled, handleFulfilled)

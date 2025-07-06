@@ -10,8 +10,11 @@ export const allBooksAction = createAsyncThunk(
       const response = await axiosClient.get(API_ROUTES.ALL_BOOKS, {
         ...data,
       });
-      console.log('response all books', response.data.response);
-      return response;
+      return {
+  data: response?.data?.data,
+  message: response?.data?.message,
+  status: response?.status
+};
     } catch (error) {
       rejectWithValue(error);
     }
