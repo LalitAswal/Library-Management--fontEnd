@@ -3,6 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { allBooksAction, borrowBookAction, searchBookAction } from '../../../Redux/features/action/booksAction.js';
 import { useNavigate } from 'react-router-dom';
 import './BooksList.css';
+import NavBar from '../../common/Navbar.js';
+
+const user = {
+  name: sessionStorage.getItem("userName"),
+  role: sessionStorage.getItem("role")
+};
 
 export const BooksList = () => {
   const dispatch = useDispatch();
@@ -66,7 +72,22 @@ export const BooksList = () => {
     navigate('/');
   };
 
+  const handleProfile = () => {
+    navigate('/profile');
+  };
+
+  const handleBookList = () => {
+    navigate('/Borrowed_Book_List');
+  };
+
   return (
+
+    <>
+    {user && <NavBar user={user} handleLogout={handleLogout}
+    //  handleProfile={handleProfile} handleBookList={handleBookList}
+      />}
+    
+    
     <div className="books-container">
       <div className="books-header">
         <h1>Books List</h1>
@@ -133,5 +154,6 @@ export const BooksList = () => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };

@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom"; 
 import { bookDetailsAction } from "../../../Redux/features/action/booksAction";
-import './BooksList.css';  // Assuming you include all styles here, including book details styles
+import './BooksList.css';
+import NavBar from "../../common/Navbar";
+
+const user = {
+  name: sessionStorage.getItem("userName"),
+  role: sessionStorage.getItem("role")
+};
 
 export const BookDetails = () => {
   const { id } = useParams(); 
@@ -26,11 +32,27 @@ export const BookDetails = () => {
   }, [id, dispatch]);
 
   const handleBack = () => {
-    navigate(-1); // Go back to previous page
-    // Or use navigate('/books') if you want to force it to the books page
+    navigate(-1);
+  };
+
+  const handleLogout = () => {
+    sessionStorage.clear();
+    navigate('/');
+  };
+  const handleProfile = () => {
+    navigate('/profile');
+  };
+
+  const handleBookList = () => {
+    navigate('/Borrowed_Book_List');
   };
 
   return (
+    <>
+     {user && <NavBar user={user} handleLogout={handleLogout} 
+    //  handleProfile={handleProfile} handleBookList={handleBookList}
+      />}
+    
     <div className="book-details-container">
       <h1>Book Details</h1>
       {bookDetails ? (
@@ -46,5 +68,6 @@ export const BookDetails = () => {
 
       <button className="back-button" onClick={handleBack}>← Back</button>
     </div>
+    </>
   );
 };

@@ -23,11 +23,13 @@ const LoginPage = () => {
       console.log("result", result);
 
       const token = result?.payload.token;
+      const userName = result?.payload.userName;
       const decodedToken = await jwtDecode(token);
       sessionStorage.setItem("id", decodedToken.id);
       sessionStorage.setItem("role", decodedToken.role);
       sessionStorage.setItem("token", token);
-      navigate("/BooksList");
+      sessionStorage.setItem("userName", userName);
+      navigate("/Books_List");
     } catch (error) {
       console.log("error", error);
     }
