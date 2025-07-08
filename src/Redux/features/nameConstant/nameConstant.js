@@ -6,6 +6,8 @@ const NAME_CONSTANT = {
     BORROW_BOOK: "borrowBook",
     RETURN_BOOK: "returnBook",
     BOOK_DETAILS: "bookDetails",
+    PROFILE: "PROFILE",
+    BORROWED_BOOK_LIST: "borrowedBookList",
 }
 
 export default NAME_CONSTANT;

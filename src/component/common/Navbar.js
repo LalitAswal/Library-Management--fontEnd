@@ -25,10 +25,10 @@ const NavBar = ({ user, handleLogout, handleProfile, handleBookList }) => {
             >
               <NavDropdown.ItemText>{user.role}</NavDropdown.ItemText>
               <NavDropdown.Divider />
-              {/* <NavDropdown.ItemText onClick={handleProfile}>profile</NavDropdown.ItemText>
+              <NavDropdown.ItemText onClick={handleProfile}>profile</NavDropdown.ItemText>
               <NavDropdown.Divider />
               <NavDropdown.ItemText onClick={handleBookList}>Book List</NavDropdown.ItemText>
-              <NavDropdown.Divider /> */}
+              <NavDropdown.Divider />
               <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
             </NavDropdown>
           </Nav>

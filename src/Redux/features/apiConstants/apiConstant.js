@@ -1,11 +1,13 @@
 const API_ROUTES = {
     LOGIN:"/user/login",
     REGISTER:"/user/register",
-    ALL_BOOKS:"/book/",
+    PROFILE:"/user/profile",
+    ALL_BOOKS:"/book",
+    BORROWED_BOOK_LIST:"/user/borrowedBookList",
     SEARCH_BOOK:"/book/searchBook",
     BORROW_BOOK:"/book/borrowBook",
     RETURN_BOOK:"/book/returnBook",
-    BOOK_DETAILS:"/book/bookDetails",
+    BOOK_DETAILS:"/book/bookDetails/:id",
 
 }
 

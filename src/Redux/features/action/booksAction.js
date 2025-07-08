@@ -10,8 +10,9 @@ export const allBooksAction = createAsyncThunk(
       const response = await axiosClient.get(API_ROUTES.ALL_BOOKS, {
         ...data,
       });
+      console.log('checking response  all book action', response?.data?.response)
       return {
-  data: response?.data?.data,
+  data: response?.data?.response,
   message: response?.data?.message,
   status: response?.status
 };
@@ -38,9 +39,6 @@ export const searchBookAction = createAsyncThunk(
 export const borrowBookAction = createAsyncThunk(
   NAME_CONSTANT.BORROW_BOOK,
   async (data, { rejectWithValue }) => {
-    console.log('data borrowBookAction', data);
-    console.log('data.userId borrowBookAction', data.userId);
-    console.log('data.id borrowBookAction', data.id);
     try {
       const response = await axiosClient.post(API_ROUTES.BORROW_BOOK, {
         userId: data.userId,
@@ -73,9 +71,7 @@ export const bookDetailsAction = createAsyncThunk(
   NAME_CONSTANT.BOOK_DETAILS,
   async (data, { rejectWithValue }) => {
     try {
-      console.log("checking data bookDetailsAction", data);
       const response = await axiosClient.get(`${API_ROUTES.BOOK_DETAILS}/${data.id}`);
-      console.log("response book details", response.data.response);
       return response;
     } catch (error) {
       return rejectWithValue(error);

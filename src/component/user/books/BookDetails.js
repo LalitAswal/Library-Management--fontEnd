@@ -50,7 +50,7 @@ export const BookDetails = () => {
   return (
     <>
      {user && <NavBar user={user} handleLogout={handleLogout} 
-    //  handleProfile={handleProfile} handleBookList={handleBookList}
+     handleProfile={handleProfile} handleBookList={handleBookList}
       />}
     
     <div className="book-details-container">

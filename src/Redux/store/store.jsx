@@ -1,7 +1,9 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import {
   loginReducer,
   registrationReducer,
+  profileSliceReducer,
+  borrowedBookListReducer,
 } from "../features/slice/authSlice.js";
 import { thunk } from "redux-thunk";
 import {
@@ -26,11 +28,13 @@ const store = configureStore({
   reducer: {
     login: loginReducer,
     register: registrationReducer,
+    profile: profileSliceReducer,
     allBooks: allBooksReducer,
     borrowBook: borrowBookReducer,
     returnBook: returnBookReducer,
     bookDetails: bookDetailsReducer,
     searchBook: searchBookReducer,
+    borrowedBookList: borrowedBookListReducer,
 
     // admin reducer
     allUser: allUserReducer,

@@ -18,7 +18,7 @@ export const BooksList = () => {
   const [bookData, setBookData] = useState([]);
   const [searchField, setSearchField] = useState('status');
 
-  const { data: books, loading, message, status } = useSelector((state) => state.allBooks);
+  const { response: books, loading, message, status } = useSelector((state) => state.allBooks);
 
   useEffect(() => {
     dispatch(allBooksAction());
@@ -64,7 +64,7 @@ export const BooksList = () => {
   };
 
   const handleBookDetails = (id) => {
-    navigate(`/bookDetails/${id}`);
+    navigate(`/book_Details/${id}`);
   };
 
   const handleLogout = () => {
@@ -84,14 +84,14 @@ export const BooksList = () => {
 
     <>
     {user && <NavBar user={user} handleLogout={handleLogout}
-    //  handleProfile={handleProfile} handleBookList={handleBookList}
+     handleProfile={handleProfile} handleBookList={handleBookList}
       />}
     
     
     <div className="books-container">
       <div className="books-header">
         <h1>Books List</h1>
-        <button className="logout-button" onClick={handleLogout}>Logout</button>
+        {/* <button className="logout-button" onClick={handleLogout}>Logout</button> */}
       </div>
 
       <div className="search-section">
@@ -131,6 +131,7 @@ export const BooksList = () => {
           </tr>
         </thead>
         <tbody>
+          {console.log('bookData',bookData)}
           {bookData?.map((book, index) => (
             <tr key={book.id} onClick={() => handleBookDetails(book.id)}>
               <td>{index + 1}</td>
