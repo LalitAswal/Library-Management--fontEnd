@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { userLoginAction } from "../Redux/features/action/authAction.js";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { userLoginAction } from '../Redux/features/action/authAction.js';
 
-import { jwtDecode } from "jwt-decode";
-import { useNavigate } from "react-router-dom";
-import "./LoginPage.css";
+import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
+import './LoginPage.css';
 
 const LoginPage = () => {
   const [loginForm, setLoginForm] = useState({
-    userName: "",
-    password: "",
+    userName: '',
+    password: '',
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,18 +20,18 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const result = await dispatch(userLoginAction(loginForm));
-      console.log("result", result);
+      console.log('result', result);
 
       const token = result?.payload.token;
       const userName = result?.payload.userName;
       const decodedToken = await jwtDecode(token);
-      sessionStorage.setItem("id", decodedToken.id);
-      sessionStorage.setItem("role", decodedToken.role);
-      sessionStorage.setItem("token", token);
-      sessionStorage.setItem("userName", userName);
-      navigate("/Books_List");
+      sessionStorage.setItem('id', decodedToken.id);
+      sessionStorage.setItem('role', decodedToken.role);
+      sessionStorage.setItem('token', token);
+      sessionStorage.setItem('userName', userName);
+      navigate('/Books_List');
     } catch (error) {
-      console.log("error", error);
+      console.log('error', error);
     }
   };
 
@@ -59,6 +59,7 @@ const LoginPage = () => {
             required
           />
         </label>
+
         {message && <span className="auth-message">{message}</span>}
 
         <label htmlFor="password" className="auth-label">
@@ -75,7 +76,7 @@ const LoginPage = () => {
         </label>
 
         <button className="auth-button" type="submit" disabled={loading}>
-          {loading ? "Logging in..." : "Submit"}
+          {loading ? 'Logging in...' : 'Submit'}
         </button>
 
         <a className="auth-link" href="/register">

@@ -1,0 +1,7 @@
+# .prettierignore
+node_modules
+build
+dist
+public
+uploads
+*.min.js
