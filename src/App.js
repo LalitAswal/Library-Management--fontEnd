@@ -7,6 +7,9 @@ import { BookDetails } from './component/user/books/BookDetails.js';
 import NavBar from './component/common/Navbar.js';
 import Profile from './component/user/userDetails/Profile.jsx';
 import { BorrowedBookList } from './component/user/userDetails/BorrowedBookList.jsx';
+import { CreateBook } from './component/admin/book/CreateBook.jsx';
+import AllUserList from './component/admin/user/AllUserList.jsx';
+import UpdateBook from './component/admin/book/UpdateBook.jsx';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -25,10 +28,13 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage onLogin={handleLogin} />} />
         <Route path="/register" element={<RegistrationPage />} />
-         <Route path="/Profile" element={<Profile />} /> 
-         <Route path="/Borrowed_Book_List" element={<BorrowedBookList />} />
+        <Route path="/Profile" element={<Profile />} />
+        <Route path="/Borrowed_Book_List" element={<BorrowedBookList />} />
         <Route path="/Books_List" element={<BooksList />} />
-        <Route path='/book_Details/:id' element={<BookDetails />} />
+        <Route path="/book_Details/:id" element={<BookDetails />} />
+        <Route path="/create_book" element={<CreateBook />} />
+        <Route path="/update_book" element={<UpdateBook />} />
+        <Route path="/user_list" element={<AllUserList />} />
       </Routes>
     </Router>
   );

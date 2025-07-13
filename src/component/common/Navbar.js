@@ -1,6 +1,6 @@
-import React from "react";
-import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
-import { FaUserCircle } from "react-icons/fa";
+import React from 'react';
+import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
+import { FaUserCircle } from 'react-icons/fa';
 
 const NavBar = ({ user, handleLogout, handleProfile, handleBookList }) => {
   if (!user) return null;
@@ -10,12 +10,13 @@ const NavBar = ({ user, handleLogout, handleProfile, handleBookList }) => {
       <Container>
         <Navbar.Brand href="/Books_List">Library</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Brand href="/create_book">Create Book</Navbar.Brand>
+        <Navbar.Brand href="/user_list">/Users List</Navbar.Brand>
         <Navbar.Collapse className="justify-content-end">
           <Nav>
             <NavDropdown
               title={
                 <>
-                {console.log(`user`, user)}
                   <FaUserCircle className="me-2" />
                   {user.userName}
                 </>

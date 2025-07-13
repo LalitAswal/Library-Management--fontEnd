@@ -84,6 +84,10 @@ export const BooksList = () => {
     navigate('/Borrowed_Book_List');
   };
 
+  const handleBookUpdate = () => {
+    navigate('/update_book');
+  };
+
   const handleBookDelete = () => {
     // TODO  create RUdex of it
   };
@@ -139,6 +143,7 @@ export const BooksList = () => {
               <th>Status</th>
               <th>Action</th>
               <th>Delete</th>
+              {user.role === 'librarian' && <th>update</th>}
             </tr>
           </thead>
           <tbody>
@@ -171,6 +176,18 @@ export const BooksList = () => {
                     }}
                   >
                     Delete
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className={`status-button unavailable`}
+                    // disabled={book?.status !== 'AVAILABLE'}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleBookUpdate(book.id);
+                    }}
+                  >
+                    Update
                   </button>
                 </td>
               </tr>
