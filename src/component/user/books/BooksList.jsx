@@ -42,7 +42,7 @@ export const BooksList = () => {
     if (!searchValue.trim()) return;
     try {
       const result = await dispatch(
-        searchBookAction({ field: searchField, query: searchValue })
+        searchBookAction({ field: searchField, query: String(searchValue) })
       ).unwrap();
       setBookData(result);
     } catch (error) {
@@ -113,9 +113,18 @@ export const BooksList = () => {
           <label>
             Search by:
             <select value={searchField} onChange={handleFieldChange}>
-              <option value="status">Status</option>
-              <option value="author">Author</option>
-              <option value="title">Title</option>
+              <option value="status" type="text">
+                Status
+              </option>
+              <option value="author" type="text">
+                Author
+              </option>
+              <option value="title" type="text">
+                Title
+              </option>
+              <option value="title" type="text">
+                Status
+              </option>
             </select>
           </label>
 
@@ -143,7 +152,7 @@ export const BooksList = () => {
               <th>Status</th>
               <th>Action</th>
               <th>Delete</th>
-              {user.role === 'librarian' && <th>update</th>}
+              {user.role === 'librarian' && <th>Update</th>}
             </tr>
           </thead>
           <tbody>

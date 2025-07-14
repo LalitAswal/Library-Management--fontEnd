@@ -11,7 +11,8 @@ const NavBar = ({ user, handleLogout, handleProfile, handleBookList }) => {
         <Navbar.Brand href="/Books_List">Library</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Brand href="/create_book">Create Book</Navbar.Brand>
-        <Navbar.Brand href="/user_list">/Users List</Navbar.Brand>
+        <Navbar.Brand href="/user_list">Users List</Navbar.Brand>
+        <Navbar.Brand href="/bulk_upload">Bulk Upload</Navbar.Brand>
         <Navbar.Collapse className="justify-content-end">
           <Nav>
             <NavDropdown

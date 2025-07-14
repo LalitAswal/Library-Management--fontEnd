@@ -10,6 +10,8 @@ import { BorrowedBookList } from './component/user/userDetails/BorrowedBookList.
 import { CreateBook } from './component/admin/book/CreateBook.jsx';
 import AllUserList from './component/admin/user/AllUserList.jsx';
 import UpdateBook from './component/admin/book/UpdateBook.jsx';
+import { UserDetails } from './component/admin/user/UserDetails.jsx';
+import BulkUpload from './component/admin/user/BulkBookUpload.jsx';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -35,6 +37,8 @@ function App() {
         <Route path="/create_book" element={<CreateBook />} />
         <Route path="/update_book" element={<UpdateBook />} />
         <Route path="/user_list" element={<AllUserList />} />
+        <Route path="/user_details/:id" element={<UserDetails />} />
+        <Route path="/bulk_upload" element={<BulkUpload />} />
       </Routes>
     </Router>
   );

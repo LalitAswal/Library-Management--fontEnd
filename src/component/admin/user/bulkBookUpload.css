@@ -1,0 +1,35 @@
+.bulk-upload-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.upload-section {
+  margin-bottom: 1.5rem;
+}
+
+.upload-section label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.upload-section input {
+  margin-bottom: 0.5rem;
+}
+
+.upload-section button {
+  padding: 0.5rem 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.upload-message {
+  color: #333;
+  margin-bottom: 1rem;
+}

@@ -1,28 +1,30 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
 import {
   loginReducer,
   registrationReducer,
   profileSliceReducer,
   borrowedBookListReducer,
-} from "../features/slice/authSlice.js";
-import { thunk } from "redux-thunk";
+} from '../features/slice/authSlice.js';
+import { thunk } from 'redux-thunk';
 import {
   allBooksReducer,
   borrowBookReducer,
   returnBookReducer,
   searchBookReducer,
   bookDetailsReducer,
-} from "../features/slice/bookSlice.js";
+} from '../features/slice/bookSlice.js';
 import {
   allUserReducer,
   addBulkUserReducer,
   deleteUserReducer,
-} from "../AdminFeatures/slice/adminAuthSlice.js";
+  updateUserReducer,
+} from '../AdminFeatures/slice/adminAuthSlice.js';
 import {
   addBookReducer,
   uploadBookReducer,
   bulkAddBookReducer,
-} from "../AdminFeatures/slice/adminBookSlice.js";
+} from '../AdminFeatures/slice/adminBookSlice.js';
+import { updateBookAction } from '../AdminFeatures/action/adminBookAction.js';
 
 const store = configureStore({
   reducer: {
@@ -39,6 +41,8 @@ const store = configureStore({
     // admin reducer
     allUser: allUserReducer,
     addBulkUser: addBulkUserReducer,
+    updateUser: updateUserReducer,
+    updateBook: updateBookAction,
     deleteUser: deleteUserReducer,
     addBook: addBookReducer,
     uploadBook: uploadBookReducer,
