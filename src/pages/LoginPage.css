@@ -1,66 +1,81 @@
-/* AuthForm.css */
-
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f5f5f5;
+  font-family: 'Merriweather', serif;
+  background: linear-gradient(to right, #dbe6e4, #f3e9dc);
   margin: 0;
   padding: 0;
 }
 
+.library-login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.library-login-card {
+  max-width: 420px;
+  width: 90%;
+  background-color: #fff8f0;
+  padding: 35px 45px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.library-login-title {
+  text-align: center;
+  font-size: 26px;
+  color: #4b2e2e;
+  margin-bottom: 25px;
+}
+
 .auth-form {
-  max-width: 400px;
-  margin: 80px auto;
-  background-color: white;
-  padding: 30px 40px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 
 .auth-label {
-  display: block;
-  margin-bottom: 15px;
-  color: #333;
-  font-weight: 500;
+  margin-bottom: 20px;
+  color: #4b2e2e;
+  font-weight: 600;
 }
 
 .auth-input {
   width: 100%;
   padding: 10px 14px;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+  border: 1px solid #b9b9b9;
   font-size: 15px;
-  margin-top: 5px;
-  transition: border 0.2s ease;
+  margin-top: 6px;
 }
 
 .auth-input:focus {
   outline: none;
   border-color: #4b7bec;
+  background-color: #f9f9f9;
 }
 
 .auth-button {
   width: 100%;
   padding: 12px;
-  background-color: #4b7bec;
+  background-color: #6b705c;
   color: white;
   border: none;
   border-radius: 6px;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  margin-top: 15px;
+  margin-top: 10px;
   transition: background-color 0.3s ease;
 }
 
 .auth-button:hover {
-  background-color: #3867d6;
+  background-color: #556052;
 }
 
 .auth-link {
   display: block;
   text-align: center;
-  margin-top: 15px;
+  margin-top: 18px;
   color: #4b7bec;
   text-decoration: none;
 }
@@ -72,5 +87,5 @@ body {
 .auth-message {
   color: red;
   text-align: center;
-  margin-top: 10px;
+  margin-bottom: 12px;
 }

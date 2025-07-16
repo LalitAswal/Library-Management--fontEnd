@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { userLoginAction } from '../Redux/features/action/authAction.js';
-
+import { userLoginAction } from '../Redux/features/action/authAction';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
@@ -11,20 +10,18 @@ const LoginPage = () => {
     userName: '',
     password: '',
   });
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const { loading, message, status } = useSelector((state) => state.login);
+  const { loading, message } = useSelector((state) => state.login);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const result = await dispatch(userLoginAction(loginForm));
-      console.log('result', result);
-
       const token = result?.payload.token;
       const userName = result?.payload.userName;
-      const decodedToken = await jwtDecode(token);
+      const decodedToken = jwtDecode(token);
       sessionStorage.setItem('id', decodedToken.id);
       sessionStorage.setItem('role', decodedToken.role);
       sessionStorage.setItem('token', token);
@@ -35,7 +32,6 @@ const LoginPage = () => {
     }
   };
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLoginForm((prevState) => ({
@@ -45,45 +41,50 @@ const LoginPage = () => {
   };
 
   return (
-    <>
-      <form className="auth-form" onSubmit={handleLogin}>
-        <label htmlFor="userName" className="auth-label">
-          User Name:
-          <input
-            className="auth-input"
-            type="text"
-            id="userName"
-            name="userName"
-            value={loginForm?.userName}
-            onChange={handleChange}
-            required
-          />
-        </label>
+    <div className="library-login-container">
+      <div className="library-login-card">
+        <h2 className="library-login-title">📚 Library Management System</h2>
+        <form className="auth-form" onSubmit={handleLogin}>
+          <label htmlFor="userName" className="auth-label">
+            username:
+            <input
+              className="auth-input"
+              type="text"
+              id="userName"
+              name="userName"
+              value={loginForm.userName}
+              onChange={handleChange}
+              required
+              placeholder="Enter your username"
+            />
+          </label>
 
-        {message && <span className="auth-message">{message}</span>}
+          {message && <span className="auth-message">{message}</span>}
 
-        <label htmlFor="password" className="auth-label">
-          Password:
-          <input
-            className="auth-input"
-            type="password"
-            id="password"
-            name="password"
-            value={loginForm?.password}
-            onChange={handleChange}
-            required
-          />
-        </label>
+          <label htmlFor="password" className="auth-label">
+            Password:
+            <input
+              className="auth-input"
+              type="password"
+              id="password"
+              name="password"
+              value={loginForm.password}
+              onChange={handleChange}
+              required
+              placeholder="Enter your password"
+            />
+          </label>
 
-        <button className="auth-button" type="submit" disabled={loading}>
-          {loading ? 'Logging in...' : 'Submit'}
-        </button>
+          <button className="auth-button" type="submit" disabled={loading}>
+            {loading ? 'Logging in...' : 'Login'}
+          </button>
 
-        <a className="auth-link" href="/register">
-          Registration
-        </a>
-      </form>
-    </>
+          <a className="auth-link" href="/register">
+            Not registered? Create an account
+          </a>
+        </form>
+      </div>
+    </div>
   );
 };
 
