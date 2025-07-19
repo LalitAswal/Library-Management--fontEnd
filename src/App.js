@@ -27,10 +27,10 @@ function App() {
 
   useEffect(() => {
     generateToken(2);
-
+    console.log('user effect of app.js');
     onMessage(messaging, (payload) => {
       const { title, body, imageUrl } = payload.data;
-
+      console.log('checking image,-------->', title, body, imageUrl);
       if (Notification.permission === 'granted') {
         if ('serviceWorker' in navigator && 'PushManager' in window) {
           console.log('inside servide worker new code');

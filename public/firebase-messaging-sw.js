@@ -4,16 +4,15 @@ importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js');
 // eslint-disable-next-line no-undef
 importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js');
 
-
 // eslint-disable-next-line no-undef
-firebase.initializeApp( {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId:process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId:process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
+firebase.initializeApp({
+  apiKey: "AIzaSyAWfgLdsgI6uYOnA19p1cv12FDlwp8aapc",
+  authDomain: "library-management-45c4a.firebaseapp.com",
+  projectId: "library-management-45c4a",
+  storageBucket: "library-management-45c4a.firebasestorage.app",
+  messagingSenderId: "1094365069482",
+  appId: "1:1094365069482:web:609e562ca8543269ed90d3",
+  measurementId: "G-XY1QZTRH28"
 });
 
 // Retrieve an instance of Firebase Messaging so that it can handle background
