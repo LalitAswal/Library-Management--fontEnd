@@ -3,7 +3,6 @@ import { getMessaging, getToken, onMessage } from 'firebase/messaging';
 import axiosClient from '../services/axios';
 import firebaseConfig from './firebaseConfig';
 
-console.log('checkingfirebaseConfig', firebaseConfig);
 const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 const generateToken = async (userType) => {
