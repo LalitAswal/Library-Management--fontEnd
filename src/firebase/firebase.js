@@ -4,6 +4,7 @@ import axiosClient from '../services/axios';
 import firebaseConfig from './firebaseConfig';
 
 const app = initializeApp(firebaseConfig);
+
 const messaging = getMessaging(app);
 const generateToken = async (userType) => {
   const permission = await Notification.requestPermission();
