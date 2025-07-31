@@ -1,49 +1,44 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import NavBar from "../../common/Navbar";
-import { userProfileAction } from "../../../Redux/features/action/authAction";
-import "./userDetails.css";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import NavBar from '../../common/Navbar';
+import { userProfileAction } from '../../../Redux/features/action/authAction';
+import './userDetails.css';
 
 export default function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
-    name: sessionStorage.getItem("userName"),
-    role: sessionStorage.getItem("role"),
-    id: sessionStorage.getItem("id"),
+    name: sessionStorage.getItem('userName'),
+    role: sessionStorage.getItem('role'),
+    id: sessionStorage.getItem('id'),
   });
 
-  const { loading, profile, error } = useSelector(
-    (state) => state?.profile?.data || {}
-  );
+  const { loading, userProfile, error } = useSelector((state) => state.profile || {});
 
   useEffect(() => {
     if (user?.id) {
-      dispatch(userProfileAction({ id: user?.id }));
+      dispatch(userProfileAction({ id: user.id }));
     }
-  }, [dispatch, user.id]);
+  }, [dispatch, user?.id]);
 
   useEffect(() => {
-    console.log("profile?.data", profile);
-    if (profile) {
-      setUser(profile);
+    if (userProfile) {
+      setUser((prev) => ({
+        ...prev,
+        ...userProfile,
+      }));
     }
-  }, [profile]);
+  }, [userProfile]);
 
   const handleLogout = () => {
     sessionStorage.clear();
-    navigate("/");
+    navigate('/');
   };
 
-  const handleProfile = () => {
-    navigate("/profile");
-  };
-
-  const handleBookList = () => {
-    navigate("/Borrowed_Book_List");
-  };
+  const handleProfile = () => navigate('/profile');
+  const handleBookList = () => navigate('/Borrowed_Book_List');
 
   return (
     <>
@@ -57,14 +52,16 @@ export default function Profile() {
       <div className="profile-container">
         <h2>User Profile</h2>
         <p>
-          <strong>Name:</strong> {user.username || user.name || "N/A"}
+          <strong>Name:</strong> {user.username || user.name || 'N/A'}
         </p>
         <p>
-          <strong>Email:</strong> {user.email || "N/A"}
+          <strong>Email:</strong> {user.email || 'N/A'}
         </p>
         <p>
-          <strong>Role:</strong> {user.role || "N/A"}
+          <strong>Role:</strong> {user.role || 'N/A'}
         </p>
+        {loading && <p>Loading profile...</p>}
+        {error && <p style={{ color: 'red' }}>Error: {error}</p>}
       </div>
     </>
   );

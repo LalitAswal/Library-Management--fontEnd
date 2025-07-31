@@ -23,31 +23,35 @@ function App() {
 
   const handleLogout = () => {
     setUser(null);
+    sessionStorage.clear();
   };
 
   useEffect(() => {
-    generateToken(2);
-    console.log('user effect of app.js');
-    onMessage(messaging, (payload) => {
-      const { title, body, imageUrl } = payload.data;
-      console.log('checking image,-------->', title, body, imageUrl);
-      if (Notification.permission === 'granted') {
-        if ('serviceWorker' in navigator && 'PushManager' in window) {
-          console.log('inside servide worker new code');
-          navigator.serviceWorker.ready.then(function (registration) {
-            registration.showNotification(title, {
-              body: body,
-              icon: imageUrl,
+    if (user) {
+      console.log('User logged in, requesting notification permission...');
+      generateToken(2);
+
+      onMessage(messaging, (payload) => {
+        const { title, body, imageUrl } = payload.data;
+        console.log('Notification received:', title, body, imageUrl);
+
+        if (Notification.permission === 'granted') {
+          if ('serviceWorker' in navigator && 'PushManager' in window) {
+            navigator.serviceWorker.ready.then((registration) => {
+              registration.showNotification(title, {
+                body,
+                icon: imageUrl,
+              });
             });
-          });
+          } else {
+            console.log('Service Worker or Push Notifications are not supported');
+          }
         } else {
-          console.log('Service Worker or Push Notifications are not supported');
+          console.log('Notification permission not granted.');
         }
-      } else {
-        console.log('Notification permission not granted.');
-      }
-    });
-  }, []);
+      });
+    }
+  }, [user]);
 
   useEffect(() => {
     if ('serviceWorker' in navigator) {
